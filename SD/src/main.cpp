@@ -10,7 +10,6 @@ void setup(){
 
     // Serial.println("Initialize IO expander");
     displayDevice.init(); // Initialize display device
-    // vTaskDelay(1000); // Delay for 1 second
 
     /* Initialize IO expander */
     // expander = new ESP_IOExpander_CH422G(0 ,EXAMPLE_I2C_ADDR, EXAMPLE_I2C_SCL_PIN, EXAMPLE_I2C_SDA_PIN);
@@ -59,22 +58,6 @@ void setup(){
 
     uint64_t cardSize = SD.cardSize() / (1024 * 1024);
     Serial.printf("SD Card Size: %lluMB\n", cardSize); // SD card size
-
-    // Testing file system functionality
-    listDir(SD, "/", 0);
-    createDir(SD, "/mydir");
-    listDir(SD, "/", 0);
-    removeDir(SD, "/mydir");
-    listDir(SD, "/", 2);
-    writeFile(SD, "/hello.txt", "Hello ");
-    appendFile(SD, "/hello.txt", "World!\n");
-    readFile(SD, "/hello.txt");
-    deleteFile(SD, "/foo.txt");
-    renameFile(SD, "/hello.txt", "/foo.txt");
-    readFile(SD, "/foo.txt");
-    testFileIO(SD, "/test.txt");
-    Serial.printf("Total space: %lluMB\n", SD.totalBytes() / (1024 * 1024)); // Total space
-    Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024)); // Used space
 }
 
 // Main Loop
