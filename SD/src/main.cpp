@@ -8,29 +8,29 @@ ESP_IOExpander_CH422G *expander = NULL;
 void setup(){
     Serial.begin(115200);
 
-    Serial.println("Initialize IO expander");
-    // displayDevice.init(); // Initialize display device
+    // Serial.println("Initialize IO expander");
+    displayDevice.init(); // Initialize display device
     // vTaskDelay(1000); // Delay for 1 second
 
     /* Initialize IO expander */
-    expander = new ESP_IOExpander_CH422G(0 ,EXAMPLE_I2C_ADDR, EXAMPLE_I2C_SCL_PIN, EXAMPLE_I2C_SDA_PIN);
-    expander->init();
-    expander->begin();
+    // expander = new ESP_IOExpander_CH422G(0 ,EXAMPLE_I2C_ADDR, EXAMPLE_I2C_SCL_PIN, EXAMPLE_I2C_SDA_PIN);
+    // expander->init();
+    // expander->begin();
 
-    Serial.println("Set the IO0-7 pin to output mode.");
+    // Serial.println("Set the IO0-7 pin to output mode.");
     
-    expander->digitalWrite(TP_RST , HIGH);
-    expander->digitalWrite(LCD_RST , HIGH);
-    expander->digitalWrite(LCD_BL , HIGH);
+    // expander->digitalWrite(TP_RST , HIGH);
+    // expander->digitalWrite(LCD_RST , HIGH);
+    // expander->digitalWrite(LCD_BL , HIGH);
 
-    // Use extended GPIO for SD card
-    expander->digitalWrite(SD_CS, LOW);
+    // // Use extended GPIO for SD card
+    // expander->digitalWrite(SD_CS, LOW);
 
-    // Turn off backlight
-    expander->digitalWrite(LCD_BL, LOW);
+    // // Turn off backlight
+    // expander->digitalWrite(LCD_BL, LOW);
 
-    // When USB_SEL is HIGH, it enables FSUSB42UMX chip and gpio19, gpio20 wired CAN_TX CAN_RX, and then don't use USB Function 
-    expander->digitalWrite(USB_SEL, LOW);
+    // // When USB_SEL is HIGH, it enables FSUSB42UMX chip and gpio19, gpio20 wired CAN_TX CAN_RX, and then don't use USB Function 
+    // expander->digitalWrite(USB_SEL, LOW);
 
     // Initialize SPI
     SPI.setHwCs(false);
