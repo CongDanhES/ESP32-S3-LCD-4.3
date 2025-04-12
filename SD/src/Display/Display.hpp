@@ -33,6 +33,8 @@
 
 #define USE_LCD_TOUCH       0
 
+LV_IMG_DECLARE(img2);
+
 class Display
 {
 private:
@@ -48,6 +50,12 @@ private:
     static void lvgl_port_unlock(void);
     static void lvgl_port_task(void *arg);
     static void unit_test(uint32_t *_time);
+    static void on_create_lv_img(lv_obj_t **obj, 
+        const void *src, 
+        int16_t zoom,
+        lv_align_t align, 
+        lv_coord_t x_ofs, 
+        lv_coord_t y_ofs);
 
 public:
     Display(HardwareSerial &debugPort);

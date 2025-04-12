@@ -158,9 +158,7 @@ void Display::lvgl_port_task(void *arg)
     uint32_t lv_time = millis();
     uint32_t lv_time_update = millis();
 
-    unsigned long previousMillis; // Lưu thời gian trước đó
-    int lv_sys_seconds; // Biến đếm giây
-    int lv_sys_minutes; // Biến đếm phút
+    static lv_obj_t *logo;
     while (1) {
         // Lock the mutex due to the LVGL APIs are not thread-safe
         lvgl_port_lock(-1);
@@ -174,8 +172,24 @@ void Display::lvgl_port_task(void *arg)
             task_delay_ms = LVGL_TASK_MIN_DELAY_MS;
         }
 
+        on_create_lv_img(&logo, &img2, -1, LV_ALIGN_CENTER, 0, 0); 
 
         vTaskDelay(pdMS_TO_TICKS(task_delay_ms));
     }
+}
+
+void Display::on_create_lv_img(lv_obj_t **obj, 
+    const void *src, 
+    int16_t zoom,
+    lv_align_t align, 
+    lv_coord_t x_ofs, 
+    lv_coord_t y_ofs)
+{
+    *obj = lv_img_create(lv_scr_act());
+    lv_img_set_src(*obj, src);
+    if(zoom > -1) lv_img_set_zoom(*obj, zoom);
+    lv_obj_align(*obj, align, x_ofs, y_ofs);
+    // clear flag
+    lv_obj_clear_flag(*obj,LV_OBJ_FLAG_SCROLLABLE);
 }
 
